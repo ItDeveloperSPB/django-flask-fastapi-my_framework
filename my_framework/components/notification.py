@@ -1,4 +1,4 @@
-import jsonpickle
+# import jsonpickle
 # from simba_framework.templator import render
 
 
@@ -44,17 +44,17 @@ class EmailNotifier(Observer):
         else:
             pass
 
-class BaseSerializer:
-
-    def __init__(self, obj):
-        self.obj = obj
-
-    def save(self):
-        return jsonpickle.dumps(self.obj)
-
-    @staticmethod
-    def load(data):
-        return jsonpickle.loads(data)
+# class BaseSerializer:
+#
+#     def __init__(self, obj):
+#         self.obj = obj
+#
+#     def save(self):
+#         return jsonpickle.dumps(self.obj)
+#
+#     @staticmethod
+#     def load(data):
+#         return jsonpickle.loads(data)
 
 # поведенческий паттерн - Стратегия
 class ConsoleWriter:
