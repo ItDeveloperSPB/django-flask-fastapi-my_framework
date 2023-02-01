@@ -11,6 +11,6 @@ application = Framework(settings, routes)
 # application = FakeApplication(settings, routes)
 
 
-with make_server('', PORT, application) as httpd:
-    print(f'Сервер запущен  {URL_ADDRESS}:{PORT}')
-    httpd.serve_forever()
+# with make_server('', PORT, application) as httpd:
+#     print(f'Сервер запущен  {URL_ADDRESS}:{PORT}')
+#     httpd.serve_forever()
