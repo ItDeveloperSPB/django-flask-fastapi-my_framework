@@ -1,15 +1,11 @@
 {% extends "base.html" %}
 
 {% block main_block %}
-
     <div id="">
-        {#        <main>#}
         <div class="container-fluid">
             <h1 class="mt-4">Курсы</h1>
-
-
-            <!-- Modal -->
-            <div class="modal fade" id="Category_create" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="Category_create" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -19,16 +15,21 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form method="post">
+                            <form action="/course-list/" method="post">
                                 <div class="form-group">
                                     <label for="name">Наименование:</label>
+                                    <input type="hidden" name="method" value="create">
                                     <input type="text" name="name" class="form-control" id="name" placeholder="Name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Тип курса:</label>
-                                    <input type="text" name="name" class="form-control" id="name" placeholder="Name">
+                                    <select name="type_course" class="form-control" multiple="multiple">
+                                        {#                                            class="form-control"  id="example-getting-started" size="5" multiple>#}
+                                        {% for type_course in objects_list_type_course %}
+                                            <option value="{{ type_course.id }}">{{ type_course.name }}</option>
+                                            {#                                        <option selected value="{{ type_course.id }}">{{ type_course.name }}</option>#}
+                                        {% endfor %}
+                                    </select>
                                 </div>
-
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary">Создать</button>
                                 </div>
@@ -60,22 +61,39 @@
                                 <tr>
                                     <td>{{ course.id }}</td>
                                     <td>{{ course.name }}</td>
-                                    <td>{{ course.type }}</td>
+                                    <td>
+                                        {#{% for list_cource in course.type %}#}
+                                        {% for i in course.type %}
+                                            {% if course.type|length > 1 %}
+                                                {% if i == course.type|last %}
+                                                    {{ i.name }}
+                                                {% else %}
+                                                    {{ i.name }} |
+                                                {% endif %}
+                                            {% else %}
+                                                {{ i.name }}
+                                            {% endif %}
+                                            {#                                        {% endfor %}#}
+                                        {% endfor %}
+                                    </td>
                                     <td>
                                         <form action="#" method="post">
-                                            <input class="btn btn-danger btn-block" type="submit" value="Скопировать">
+                                            <input class="btn btn-danger btn-block" type="submit" value="Не работате">
                                         </form>
                                     </td>
 
                                     <td>
                                         <form action="">
-                                            <input class="btn btn-success btn-block" type="submit" value="Изменить">
+                                            <input class="btn btn-success btn-block" type="submit" value="Не работате">
                                         </form>
                                     </td>
                                     <td>
-                                        <form action="#" method="post">
+                                        <form action="/course-list/" method="post">
+                                            <input type="hidden" name="method" value="delete">
+                                            <input type="hidden" name="id" value="{{ course.id }}">
                                             <input class="btn btn-danger btn-block" type="submit" value="Удалить">
                                         </form>
+
                                     </td>
                                 </tr>
                             {% endfor %}

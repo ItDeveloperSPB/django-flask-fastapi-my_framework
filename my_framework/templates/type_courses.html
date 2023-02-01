@@ -1,15 +1,12 @@
 {% extends "base.html" %}
 
 {% block main_block %}
-
     <div id="">
-        {#        <main>#}
         <div class="container-fluid">
             <h1 class="mt-4">Типы курсов</h1>
-
-
             <!-- Modal -->
-            <div class="modal fade" id="Category_create" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="type_course_create" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -19,12 +16,13 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="/type-course-create/" method="post">
+                            <form action="/type-course-list/" method="post">
                                 <div class="form-group">
                                     <label for="name">Наименование:</label>
+                                    <input type="hidden" name="method" value="create">
                                     <input type="text" name="name" class="form-control" id="name" placeholder="Name">
                                 </div>
-{#                                <a href="/add-student/">Добавить студента на курс</a>#}
+                                {#                                <a href="/add-student/">Добавить студента на курс</a>#}
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary">Создать</button>
                                 </div>
@@ -33,6 +31,9 @@
                     </div>
                 </div>
             </div>
+
+            {% include 'include/update_course_type.html' %}
+
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-table mr-1"></i>
@@ -57,17 +58,25 @@
                                     <td>{{ course.name }}</td>
                                     <td>
                                         <form action="#" method="post">
-                                            <input class="btn btn-danger btn-block" type="submit" value="Скопировать">
+                                            <input class="btn btn-danger btn-block" type="submit" value="Не работает" readonly>
                                         </form>
                                     </td>
 
-                                    <td>
-                                        <form action="">
-                                            <input class="btn btn-success btn-block" type="submit" value="Изменить">
-                                        </form>
+                                    <td class="update_type_course_ajax">
+
+                                        <button type="button" class="btn btn-success btn-block" value="{{ course.id }}">
+{#                                                type="button" class="btn btn-success" data-toggle="modal"#}
+{#                                                data-target="#type_course_update">#}
+                                            Изменить
+                                        </button>
+                                        {#                                        <form action="/type-course-list/">#}
+                                        {#                                            <input class="btn btn-success btn-block" type="submit" value="Изменить">#}
+                                        {#                                        </form>#}
                                     </td>
                                     <td>
-                                        <form action="#" method="post">
+                                        <form action="/type-course-list/" method="post">
+                                            <input type="hidden" name="method" value="delete">
+                                            <input type="hidden" name="id" value="{{ course.id }}">
                                             <input class="btn btn-danger btn-block" type="submit" value="Удалить">
                                         </form>
                                     </td>
@@ -78,12 +87,13 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#Category_create">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#type_course_create">
                         Добавить тип курса
                     </button>
                 </div>
             </div>
         </div>
     </div>
+
 
 {% endblock %}

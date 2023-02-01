@@ -9,4 +9,4 @@
 - 1. gunicorn -w 5 -b 0.0.0.0:8019 '{main}:app'
 
 # Запуск проекта на  my_framewrok
-- 1. gunicorn -w 5 -b 0.0.0.0:8019 '{main}:app'
+- 1. gunicorn --workers=5 --bind 0.0.0.0:8077 run:application
