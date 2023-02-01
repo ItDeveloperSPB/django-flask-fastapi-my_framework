@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block main_block %}
+
+    <div id="">
+        {#        <main>#}
+        <div class="container-fluid">
+            <h1 class="mt-4">Ученики</h1>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="Category_create" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Добавить ученика</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post">
+                                <div class="form-group">
+                                    <label for="name">ФИО:</label>
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="Name">
+                                </div>
+                                <div class="form-group">
+
+                                    <select name="course"  class="form-control" multiple>
+                                        {% for course in list_course %}
+{#                                        <option selected value="s1">Чебурашка</option>#}
+                                        <option value="{{ course.id }}">{{ course.name }}</option>
+{#                                        <option value="s3">Шапокляк</option>#}
+{#                                        <option value="s4">Крыса Лариса</option>#}
+                                        {% endfor %}
+                                   </select>
+
+
+{#                                    <label for="email1">Курсы</label>#}
+{#                                    <input type="email" name="email" class="form-control" id="email1" placeholder="Email">#}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Создать</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table mr-1"></i>
+                    Список учеников
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Ид</th>
+                                <th>ФИО</th>
+                                <th>Курсы</th>
+                                <th>Скопировать</th>
+                                <th>Изменить</th>
+                                <th>Удалить</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for teacher in object_list %}
+                                <tr>
+                                    <td>{{ teacher.id }}</td>
+                                    <td>{{ teacher.name }}</td>
+                                    <td>{{ category.courses }}</td>
+                                    <td>
+                                        <form action="#" method="post">
+                                            <input class="btn btn-danger btn-block" type="submit" value="Скопировать">
+                                        </form>
+                                    </td>
+
+                                    <td>
+                                        <form action="">
+                                            <input class="btn btn-success btn-block" type="submit" value="Изменить">
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="#" method="post">
+                                            <input class="btn btn-danger btn-block" type="submit" value="Удалить">
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#Category_create">
+                        Добавить Ученика
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

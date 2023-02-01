@@ -1,3 +1,5 @@
 .idea
 venv_django
 venv_flask
+venv_fast_api
+venv_my_framework

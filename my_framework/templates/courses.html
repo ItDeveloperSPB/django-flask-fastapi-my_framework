@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block main_block %}
+
+    <div id="">
+        {#        <main>#}
+        <div class="container-fluid">
+            <h1 class="mt-4">Курсы</h1>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="Category_create" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Добавить Курс</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post">
+                                <div class="form-group">
+                                    <label for="name">Наименование:</label>
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="Name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Тип курса:</label>
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="Name">
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Создать</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table mr-1"></i>
+                    Список курсов
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Ид</th>
+                                <th>Наименование</th>
+                                <th>Тип курса</th>
+                                <th>Скопировать</th>
+                                <th>Изменить</th>
+                                <th>Удалить</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for course in objects_list %}
+                                <tr>
+                                    <td>{{ course.id }}</td>
+                                    <td>{{ course.name }}</td>
+                                    <td>{{ course.type }}</td>
+                                    <td>
+                                        <form action="#" method="post">
+                                            <input class="btn btn-danger btn-block" type="submit" value="Скопировать">
+                                        </form>
+                                    </td>
+
+                                    <td>
+                                        <form action="">
+                                            <input class="btn btn-success btn-block" type="submit" value="Изменить">
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="#" method="post">
+                                            <input class="btn btn-danger btn-block" type="submit" value="Удалить">
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#Category_create">
+                        Добавить курс
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
